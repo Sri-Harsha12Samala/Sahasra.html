@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Welcome to Sahasra</title>
+  <!-- Favicon -->
+  <link rel="icon" href="favicon.png" type="image/x-icon">
+  <style>
+    body {
+      margin: 0;
+      background-color: #000; /* Black background */
+      overflow: hidden; /* Prevent scrollbars */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh; /* Full viewport height */
+      color: #fff;
+      font-family: "Times New Roman", serif; /* Times New Roman font */
+    }
+    video {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 100vw; /* Full viewport width */
+      height: 100vh; /* Full viewport height */
+      object-fit: cover; /* Ensures the video covers the screen without distortion */
+      z-index: -1; /* Place video in the background */
+    }
+    .welcome-text {
+      text-align: center;
+      animation: fadeOut 4s 4s forwards; /* Fade out after 4 seconds */
+    }
+    @keyframes fadeOut {
+      from {
+        opacity: 1;
+      }
+      to {
+        opacity: 0;
+      }
+    }
+    #playButton {
+      position: absolute;
+      top: 70%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      padding: 15px 30px;
+      background-color: #fff;
+      color: #000;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 18px;
+    }
+  </style>
+</head>
+<body>
+  <video id="video" muted>
+    <source src="sahashra.mp4" type="video/mp4">
+  </video>
+
+  <div class="welcome-text">
+    <h1></h1>
+  </div>
+
+  <button id="playButton">Play</button>
+
+  <script>
+    const video = document.getElementById('video');
+    const playButton = document.getElementById('playButton');
+    const welcomeText = document.querySelector('.welcome-text');
+
+    // Unmute and play the video when the user clicks the button
+    playButton.addEventListener('click', () => {
+      video.muted = false;
+      video.play();
+      playButton.style.display = 'none'; // Hide the play button
+    });
+
+    // Fade out welcome text and show play button after 4 seconds
+    setTimeout(() => {
+      welcomeText.style.display = 'none';
+      playButton.style.display = 'block';
+    }, 4000);
+
+    // Redirect to the About Us page after the video ends
+    video.addEventListener('ended', () => {
+      window.location.href = 'Company_Profile.html'; // Redirect to About Us page
+    });
+  </script>
+</body>
+</html>
